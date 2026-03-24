@@ -1,0 +1,10 @@
+name: login
+variables:
+  - secret: true
+    name: username
+  - secret: true
+    name: password
+  - secret: true
+    name: client_id
+  - secret: true
+    name: client_secret
