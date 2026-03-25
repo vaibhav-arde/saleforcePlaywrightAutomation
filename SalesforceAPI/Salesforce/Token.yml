@@ -24,6 +24,47 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const response = res.getBody();
+
+        bru.setEnvVar("access_token", response.access_token);
+        bru.setEnvVar("instance_url", response.instance_url);
+
+        console.log("Access Token saved:", response.access_token);
+        console.log("Instance URL saved:", response.instance_url);
+    - type: tests
+      code: |-
+        const response = res.getBody();
+
+        test("Status code should be 200", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Access token should be present", function () {
+          expect(response.access_token).to.exist;
+          expect(response.access_token).to.not.be.empty;
+        });
+
+        test("Instance URL should be present", function () {
+          expect(response.instance_url).to.exist;
+          expect(response.instance_url).to.not.be.empty;
+        });
+
+        test("Token type should be Bearer", function () {
+          expect(response.token_type).to.equal("Bearer");
+        });
+
+        test("Issued at should be present", function () {
+          expect(response.issued_at).to.exist;
+        });
+
+        test("Signature should be present", function () {
+          expect(response.signature).to.exist;
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

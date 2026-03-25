@@ -1,0 +1,57 @@
+info:
+  name: Account Creation
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{instance_url}}/services/data/v66.0/sobjects/Account"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Account using Api"
+      }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const response = res.getBody();
+
+        bru.setEnvVar("account_id", response.id);
+    - type: tests
+      code: |-
+        const response = res.getBody();
+
+        test("Status code should be 201 or 200", function () {
+          expect([200, 201]).to.include(res.getStatus());
+        });
+
+        test("Response should contain account id", function () {
+          expect(response).to.have.property("id");
+          expect(response.id).to.be.a("string").and.not.empty;
+        });
+
+        test("Account id should start with 001", function () {
+          expect(response.id.startsWith("001")).to.equal(true);
+        });
+
+        test("Success should be true", function () {
+          expect(response).to.have.property("success");
+          expect(response.success).to.equal(true);
+        });
+
+        test("Errors should be an empty array", function () {
+          expect(response).to.have.property("errors");
+          expect(response.errors).to.be.an("array").that.is.empty;
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
