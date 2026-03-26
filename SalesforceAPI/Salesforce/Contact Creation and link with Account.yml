@@ -10,8 +10,8 @@ http:
     type: json
     data: |-
       {
-        "FirstName": "Created from",
-        "LastName": "Bruno",
+        "FirstName": "Created from {{timestamp}}",
+        "LastName": "Bruno {{timestamp}}",
         "AccountId": "{{account_id}}"
       }
   auth:
@@ -20,6 +20,10 @@ http:
 
 runtime:
   scripts:
+    - type: before-request
+      code: |-
+        const timestamp = Date.now();
+        bru.setEnvVar("timestamp", timestamp);
     - type: tests
       code: |-
         const response = res.getBody();

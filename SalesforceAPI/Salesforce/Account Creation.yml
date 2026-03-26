@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "name": "Account using Api"
+        "name": "Account using Api {{timestamp}}"
       }
   auth:
     type: bearer
@@ -18,6 +18,10 @@ http:
 
 runtime:
   scripts:
+    - type: before-request
+      code: |-
+        const timestamp = Date.now();
+        bru.setEnvVar("timestamp", timestamp);
     - type: after-response
       code: |-
         const response = res.getBody();
