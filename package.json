@@ -1,17 +1,50 @@
 {
-  "name": "salesforceautomation",
+  "name": "salesforce-automation",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
+  "description": "Playwright TypeScript Salesforce Hybrid Test Automation Framework",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --grep @ui",
+    "test:api": "npx playwright test --grep @api",
+    "test:e2e": "npx playwright test --grep @e2e",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test --grep @regression",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write '**/*.ts'",
+    "format:check": "prettier --check '**/*.ts'",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "keywords": ["playwright", "typescript", "salesforce", "automation", "testing"],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.3.0"
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "eslint-plugin-playwright": "^1.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.0",
+    "husky": "^9.1.0",
+    "lint-staged": "^15.4.0",
+    "allure-playwright": "^3.2.0"
   },
   "dependencies": {
-    "dotenv": "^17.3.1"
+    "dotenv": "^16.4.0",
+    "@faker-js/faker": "^9.3.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

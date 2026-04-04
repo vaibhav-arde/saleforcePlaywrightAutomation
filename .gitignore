@@ -1,11 +1,31 @@
+# Salesforce Playwright TypeScript Automation
+
+# Dependencies
+node_modules/
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-config/
+
+# TypeScript
+dist/
+
+# Reports
+reports/
+
+# Environment
 .env
+config/*.env
+
+# Salesforce API collections
 SalesforceAPI/Salesforce/environments/*
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
