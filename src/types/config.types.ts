@@ -7,7 +7,8 @@ export interface EnvironmentConfig {
   baseUrl: string;
   salesforce: {
     username: string;
-    password: string;
+    passwordApi: string;
+    passwordUi: string;
     clientId: string;
     clientSecret: string;
     loginUrl: string;

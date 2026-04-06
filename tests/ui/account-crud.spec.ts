@@ -9,7 +9,7 @@ import { AccountPage } from '../../src/pages/AccountPage.js';
 import { TestDataHelper } from '../../src/utils/helpers.js';
 
 test.describe('Account CRUD Operations', { tag: ['@regression', '@ui'] }, () => {
-  test('should create a new account via UI', async ({ loginPage, page }) => {
+  test.only('should create a new account via UI', async ({ loginPage, page }) => {
     expect(loginPage).toBeDefined();
     // Arrange
     const appLauncher = new AppLauncherPage(page);

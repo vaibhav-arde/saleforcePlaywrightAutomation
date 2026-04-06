@@ -4,8 +4,8 @@
  * Uses typed API clients from fixtures (DIP — depends on abstractions)
  */
 
-import { test, expect } from '../../src/fixtures/index.js';
-import { TestDataHelper } from '../../src/utils/helpers.js';
+import { test, expect } from '@fixtures/index.js';
+import { TestDataHelper } from '@utils/helpers.js';
 
 test.describe('Account API Operations', { tag: ['@smoke', '@api'] }, () => {
   let createdAccountId: string;

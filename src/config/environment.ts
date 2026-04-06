@@ -26,7 +26,8 @@ export const EnvConfig: EnvironmentConfig = {
   baseUrl: process.env.BASE_URL || 'https://login.salesforce.com',
   salesforce: {
     username: process.env.sit_salesforce_username || '',
-    password: process.env.sit_salesforce_password || '',
+    passwordApi: process.env.sit_salesforce_password_api || '',
+    passwordUi: process.env.sit_salesforce_password_ui || '',
     clientId: process.env.consumer_key || '',
     clientSecret: process.env.consumer_secret || '',
     loginUrl: 'https://login.salesforce.com/services/oauth2/token',

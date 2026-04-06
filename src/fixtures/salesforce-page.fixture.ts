@@ -16,7 +16,7 @@ export const test = apiTest.extend<SalesforcePageFixtures>({
     const loginPage = new LoginPage(page);
     await loginPage.loginToSalesforce(
       EnvConfig.salesforce.username,
-      EnvConfig.salesforce.password,
+      EnvConfig.salesforce.passwordUi,
     );
     await loginPage.assertLoginSuccess();
     await use(loginPage);

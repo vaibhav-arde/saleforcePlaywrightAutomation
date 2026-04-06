@@ -3,8 +3,8 @@
  * Tags: @regression, @api
  */
 
-import { test, expect } from '../../src/fixtures/index.js';
-import { TestDataHelper } from '../../src/utils/helpers.js';
+import { test, expect } from '@fixtures/index.js';
+import { TestDataHelper } from '@utils/helpers.js';
 
 test.describe('Contact API Operations', { tag: ['@regression', '@api'] }, () => {
   test('should create a contact linked to an account via API', async ({

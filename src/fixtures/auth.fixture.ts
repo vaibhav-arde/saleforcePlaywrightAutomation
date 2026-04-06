@@ -21,7 +21,7 @@ export const authTest = base.extend<object, AuthFixtures>({
       const token = await authClient.authenticate({
         loginUrl: EnvConfig.salesforce.loginUrl,
         username: EnvConfig.salesforce.username,
-        password: EnvConfig.salesforce.password,
+        password: EnvConfig.salesforce.passwordApi,
         clientId: EnvConfig.salesforce.clientId,
         clientSecret: EnvConfig.salesforce.clientSecret,
       });
