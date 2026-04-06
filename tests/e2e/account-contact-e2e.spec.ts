@@ -11,11 +11,9 @@ import { TestDataHelper } from '../../src/utils/helpers.js';
 
 test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => {
   test('API creates account → UI creates linked contact', async ({
-    loginPage,
     accountApi,
-    page,
+    authPage,
   }) => {
-    expect(loginPage).toBeDefined();
 
     // ─── Step 1: API — Create Account ────────────────────────
     const accountName = `E2E Account ${Date.now()}`;
@@ -23,11 +21,11 @@ test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => 
     expect(accountId).toBeTruthy();
 
     // ─── Step 2: UI — Navigate to Contacts ───────────────────
-    const appLauncher = new AppLauncherPage(page);
+    const appLauncher = new AppLauncherPage(authPage);
     await appLauncher.navigateToObject('Contacts');
 
     // ─── Step 3: UI — Create Contact linked to API account ───
-    const contactPage = new ContactPage(page);
+    const contactPage = new ContactPage(authPage);
     await contactPage.assertContactTab();
 
     const firstName = TestDataHelper.contactFirstName();
@@ -42,12 +40,10 @@ test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => 
   });
 
   test('API creates account + contact → UI verifies contact details', async ({
-    loginPage,
     accountApi,
     contactApi,
-    page,
+    authPage,
   }) => {
-    expect(loginPage).toBeDefined();
 
     // ─── Step 1: API — Create Account + Contact ──────────────
     const accountName = `E2E Verify Account ${Date.now()}`;
@@ -63,7 +59,7 @@ test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => 
     );
 
     // ─── Step 2: UI — Navigate to contact record ─────────────
-    const appLauncher = new AppLauncherPage(page);
+    const appLauncher = new AppLauncherPage(authPage);
     await appLauncher.navigateToObject('Contacts');
 
     // Note: In a real scenario, you would navigate directly to the contact record URL

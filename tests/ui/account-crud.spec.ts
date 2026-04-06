@@ -3,17 +3,16 @@
  * Tags: @regression, @ui
  */
 
-import { test, expect } from '../../src/fixtures/index.js';
+import { test } from '../../src/fixtures/index.js';
 import { AppLauncherPage } from '../../src/pages/AppLauncherPage.js';
 import { AccountPage } from '../../src/pages/AccountPage.js';
 import { TestDataHelper } from '../../src/utils/helpers.js';
 
 test.describe('Account CRUD Operations', { tag: ['@regression', '@ui'] }, () => {
-  test.only('should create a new account via UI', async ({ loginPage, page }) => {
-    expect(loginPage).toBeDefined();
+  test('should create a new account via UI', async ({ authPage }) => {
     // Arrange
-    const appLauncher = new AppLauncherPage(page);
-    const accountPage = new AccountPage(page);
+    const appLauncher = new AppLauncherPage(authPage);
+    const accountPage = new AccountPage(authPage);
     const accountName = TestDataHelper.accountName();
     const accountNumber = TestDataHelper.accountNumber();
 
@@ -26,11 +25,10 @@ test.describe('Account CRUD Operations', { tag: ['@regression', '@ui'] }, () => 
     await accountPage.assertAccountCreated(accountName);
   });
 
-  test('should create account with Warm rating', async ({ loginPage, page }) => {
-    expect(loginPage).toBeDefined();
+  test('should create account with Warm rating', async ({ authPage }) => {
     // Arrange
-    const appLauncher = new AppLauncherPage(page);
-    const accountPage = new AccountPage(page);
+    const appLauncher = new AppLauncherPage(authPage);
+    const accountPage = new AccountPage(authPage);
     const accountName = `Warm Account ${Date.now()}`;
 
     // Act

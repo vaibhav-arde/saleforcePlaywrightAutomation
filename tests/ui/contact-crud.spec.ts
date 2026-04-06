@@ -3,17 +3,16 @@
  * Tags: @regression, @ui
  */
 
-import { test, expect } from '../../src/fixtures/index.js';
+import { test } from '../../src/fixtures/index.js';
 import { AppLauncherPage } from '../../src/pages/AppLauncherPage.js';
 import { ContactPage } from '../../src/pages/ContactPage.js';
 import { TestDataHelper } from '../../src/utils/helpers.js';
 
 test.describe('Contact CRUD Operations', { tag: ['@regression', '@ui'] }, () => {
-  test('should create a new contact linked to an account', async ({ loginPage, page }) => {
-    expect(loginPage).toBeDefined();
+  test('should create a new contact linked to an account', async ({ authPage }) => {
     // Arrange
-    const appLauncher = new AppLauncherPage(page);
-    const contactPage = new ContactPage(page);
+    const appLauncher = new AppLauncherPage(authPage);
+    const contactPage = new ContactPage(authPage);
     const firstName = TestDataHelper.contactFirstName();
     const lastName = TestDataHelper.contactLastName();
     const salutation = 'Mr.';
