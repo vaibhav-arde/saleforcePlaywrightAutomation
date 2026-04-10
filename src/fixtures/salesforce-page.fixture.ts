@@ -23,7 +23,7 @@ export const test = apiTest.extend<SalesforcePageFixtures>({
     // Dynamically navigate to the Lightning domain extracted from cookies
     if (fs.existsSync(authFile)) {
       const state = JSON.parse(fs.readFileSync(authFile, 'utf8'));
-      const lightningCookie = state.cookies.find((c: any) => c.domain.includes('.lightning.force.com'));
+      const lightningCookie = state.cookies.find((c: { domain: string }) => c.domain.includes('.lightning.force.com'));
       if (lightningCookie) {
         await page.goto(`https://${lightningCookie.domain}/lightning/page/home`);
       } else {
