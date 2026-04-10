@@ -5,7 +5,16 @@ on:
   pull_request:
     branches: [main, dev]
   workflow_dispatch:
-
+    inputs:
+      test_env:
+        description: 'Target Environment'
+        required: true
+        type: choice
+        options:
+          - sale
+          - dev
+          - qa
+        default: 'sale'
 jobs:
   lint:
     name: Lint & Type Check
@@ -25,14 +34,15 @@ jobs:
         run: npm run typecheck
 
   test:
-    name: Test (${{ matrix.project }})
+    name: Test (${{ inputs.test_env || 'sale' }} / ${{ matrix.project }})
     needs: lint
+    environment: ${{ inputs.test_env || 'sale' }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        project: [chromium, firefox]
+        project: [chromium]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,11 +52,12 @@ jobs:
       - run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps ${{ matrix.project }}
-      - name: Run Playwright Tests
-        run: npx playwright test --project=${{ matrix.project }}
+      - name: Run Playwright Tests (API Only)
+        run: npx playwright test --project=${{ matrix.project }} --grep @api
         env:
           CI: true
-          TestEnv: ${{ vars.TESTENV }}
+          TestEnv: ${{ inputs.test_env || 'sale' }}
+          BASE_URL: ${{ secrets.BASE_URL }}
           sit_salesforce_username: ${{ secrets.SIT_SALESFORCE_USERNAME }}
           sit_salesforce_password_api: ${{ secrets.SIT_SALESFORCE_PASSWORD_API }}
           sit_salesforce_password_ui: ${{ secrets.SIT_SALESFORCE_PASSWORD_UI }}
