@@ -105,7 +105,7 @@ jobs:
       # Run tests based on input
       - name: Run Playwright Tests
         run: |
-          if [ "${{ inputs.test_type }}" = "api" ]; then
+          if [ "${{ inputs.test_type || 'api' }}" = "api" ]; then
             npx playwright test --project=${{ matrix.project }} --grep @api
           elif [ "${{ inputs.test_type }}" = "smoke" ]; then
             npx playwright test --project=${{ matrix.project }} --grep @smoke
