@@ -63,6 +63,32 @@ Copy `.env.example` to `.env` and fill in your Salesforce credentials:
 cp .env.example .env
 ```
 
+## 🐳 Docker
+
+Use Docker when you want a predictable local runner without installing Node or Playwright browsers on your machine.
+
+```bash
+# Build and run the default containerized suite (Chromium API tests)
+docker compose up --build playwright-tests
+
+# Run a different suite inside the same container image
+docker compose run --rm playwright-tests npm run test:smoke:chromium
+docker compose run --rm playwright-tests npm run test:regression:chromium
+docker compose run --rm playwright-tests npm run test:e2e:chromium
+```
+
+The Docker image intentionally defaults to `chromium` because that matches the current CI path and keeps the container leaner and more reliable across developer machines.
+
+UI and E2E execution inside Docker still depends on your current Salesforce authentication flow. This repo has a manual MFA-based setup step in [`tests/setup/auth.setup.ts`](tests/setup/auth.setup.ts), so API tests are the safest default for containerized runs unless you already have a valid Playwright auth state available.
+
+## ✅ Recommended Execution Strategy
+
+Keep GitHub Actions as the CI entry point and use Docker as the local execution option.
+
+- GitHub Actions is already set up, simpler to maintain, and works well for your current `chromium`-based CI runs.
+- Docker is valuable locally for onboarding, environment parity, and avoiding host-level browser setup.
+- If you later want exact runtime parity between local and CI, you can switch the GitHub Actions job to run this Docker image, but that is optional rather than necessary right now.
+
 ## 📊 Reports
 
 ```bash

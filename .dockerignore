@@ -1,0 +1,11 @@
+node_modules
+.git
+.github
+.DS_Store
+.env
+config/*.env
+playwright-report
+test-results
+blob-report
+playwright/.auth
+playwright/.cache

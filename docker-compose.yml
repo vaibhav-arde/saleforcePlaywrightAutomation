@@ -1,0 +1,23 @@
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: salesforce-automation:local
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      CI: "true"
+      TestEnv: ${TestEnv:-sale}
+      BASE_URL: ${BASE_URL:-https://login.salesforce.com}
+    command: npm run test:api:chromium
+    ipc: host
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - ms-playwright:/ms-playwright
+
+volumes:
+  node_modules:
+  ms-playwright:
