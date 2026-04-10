@@ -11,9 +11,7 @@ import path from 'path';
  * @returns Parsed array of typed objects
  */
 export function loadJsonData<T>(filePath: string): T[] {
-  const absolutePath = path.isAbsolute(filePath)
-    ? filePath
-    : path.resolve(process.cwd(), filePath);
+  const absolutePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
 
   if (!fs.existsSync(absolutePath)) {
     throw new Error(`Test data file not found: ${absolutePath}`);
@@ -30,9 +28,7 @@ export function loadJsonData<T>(filePath: string): T[] {
  * @returns Array of string arrays (rows × columns)
  */
 export function loadCsvData(filePath: string, skipHeader = true): string[][] {
-  const absolutePath = path.isAbsolute(filePath)
-    ? filePath
-    : path.resolve(process.cwd(), filePath);
+  const absolutePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
 
   if (!fs.existsSync(absolutePath)) {
     throw new Error(`Test data file not found: ${absolutePath}`);

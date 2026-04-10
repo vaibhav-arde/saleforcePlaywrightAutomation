@@ -14,8 +14,7 @@ export const SFLocators = {
   lookupInput: (placeholder: string) => `[placeholder='${placeholder}']`,
 
   /** Lightning lookup result option by title */
-  lookupOption: (title: string) =>
-    `//lightning-base-combobox-formatted-text[@title='${title}']`,
+  lookupOption: (title: string) => `//lightning-base-combobox-formatted-text[@title='${title}']`,
 
   /** Lightning formatted text (used for record names like Account name) */
   formattedText: (text: string) => `//lightning-formatted-text[text()='${text}']`,

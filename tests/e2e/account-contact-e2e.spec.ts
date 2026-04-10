@@ -10,11 +10,7 @@ import { ContactPage } from '../../src/pages/ContactPage.js';
 import { TestDataHelper } from '../../src/utils/helpers.js';
 
 test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => {
-  test('API creates account → UI creates linked contact', async ({
-    accountApi,
-    authPage,
-  }) => {
-
+  test('API creates account → UI creates linked contact', async ({ accountApi, authPage }) => {
     // ─── Step 1: API — Create Account ────────────────────────
     const accountName = `E2E Account ${Date.now()}`;
     const accountId = await accountApi.createWithDefaults(accountName);
@@ -44,19 +40,13 @@ test.describe('Account-Contact E2E Flow', { tag: ['@e2e', '@critical'] }, () => 
     contactApi,
     authPage,
   }) => {
-
     // ─── Step 1: API — Create Account + Contact ──────────────
     const accountName = `E2E Verify Account ${Date.now()}`;
     const accountId = await accountApi.createWithDefaults(accountName);
 
     const firstName = TestDataHelper.contactFirstName();
     const lastName = TestDataHelper.contactLastName();
-    const contactId = await contactApi.createLinkedToAccount(
-      firstName,
-      lastName,
-      accountId,
-      'Dr.',
-    );
+    const contactId = await contactApi.createLinkedToAccount(firstName, lastName, accountId, 'Dr.');
 
     // ─── Step 2: UI — Navigate to contact record ─────────────
     const appLauncher = new AppLauncherPage(authPage);

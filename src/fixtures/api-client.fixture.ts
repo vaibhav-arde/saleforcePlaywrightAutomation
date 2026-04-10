@@ -16,20 +16,12 @@ export type ApiClientFixtures = {
 
 export const apiTest = authTest.extend<ApiClientFixtures>({
   accountApi: async ({ authToken, request }, use) => {
-    const client = new AccountApiClient(
-      request,
-      authToken.instance_url,
-      authToken.access_token,
-    );
+    const client = new AccountApiClient(request, authToken.instance_url, authToken.access_token);
     await use(client);
   },
 
   contactApi: async ({ authToken, request }, use) => {
-    const client = new ContactApiClient(
-      request,
-      authToken.instance_url,
-      authToken.access_token,
-    );
+    const client = new ContactApiClient(request, authToken.instance_url, authToken.access_token);
     await use(client);
   },
 

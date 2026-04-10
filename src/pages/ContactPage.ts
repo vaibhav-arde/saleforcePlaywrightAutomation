@@ -54,7 +54,11 @@ export class ContactPage extends BasePage {
   }
 
   /** Assert contact was created by checking the full name on detail page */
-  async assertContactCreated(salutation: string, firstName: string, lastName: string): Promise<void> {
+  async assertContactCreated(
+    salutation: string,
+    firstName: string,
+    lastName: string,
+  ): Promise<void> {
     const fullName = `${salutation} ${firstName} ${lastName}`;
     const nameElement = this.page.locator(SFLocators.formattedName(fullName));
     await this.expectVisible(nameElement);

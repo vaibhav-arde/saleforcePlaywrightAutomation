@@ -15,7 +15,7 @@ test.describe('Salesforce Login', { tag: ['@smoke', '@ui'] }, () => {
     const loginPage = new LoginPage(page);
     await loginPage.loginToSalesforce(
       EnvConfig.salesforce.username,
-      EnvConfig.salesforce.passwordUi
+      EnvConfig.salesforce.passwordUi,
     );
     await loginPage.assertLoginSuccess();
   });

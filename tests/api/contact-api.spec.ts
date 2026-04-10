@@ -18,12 +18,7 @@ test.describe('Contact API Operations', { tag: ['@regression', '@api'] }, () => 
     // Act — create contact linked to account
     const firstName = TestDataHelper.contactFirstName();
     const lastName = TestDataHelper.contactLastName();
-    const contactId = await contactApi.createLinkedToAccount(
-      firstName,
-      lastName,
-      accountId,
-      'Mr.',
-    );
+    const contactId = await contactApi.createLinkedToAccount(firstName, lastName, accountId, 'Mr.');
 
     // Assert
     expect(contactId).toBeTruthy();
