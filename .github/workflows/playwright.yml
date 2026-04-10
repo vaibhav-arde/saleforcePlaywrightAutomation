@@ -46,11 +46,12 @@ jobs:
         run: npx playwright test --project=${{ matrix.project }}
         env:
           CI: true
-          TestEnv: ${{ vars.TEST_ENV || 'qa' }}
-          sit_salesforce_username: ${{ secrets.SF_USERNAME }}
-          sit_salesforce_password: ${{ secrets.SF_PASSWORD }}
-          consumer_key: ${{ secrets.SF_CLIENT_ID }}
-          consumer_secret: ${{ secrets.SF_CLIENT_SECRET }}
+          TestEnv: ${{ vars.TESTENV }}
+          sit_salesforce_username: ${{ secrets.SIT_SALESFORCE_USERNAME }}
+          sit_salesforce_password_api: ${{ secrets.SIT_SALESFORCE_PASSWORD_API }}
+          sit_salesforce_password_ui: ${{ secrets.SIT_SALESFORCE_PASSWORD_UI }}
+          consumer_key: ${{ secrets.CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.CONSUMER_SECRET }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
