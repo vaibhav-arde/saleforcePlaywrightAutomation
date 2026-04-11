@@ -57,10 +57,28 @@ npx playwright test --grep @e2e
 
 ## 📋 Environment Setup
 
-Copy `.env.example` to `.env` and fill in your Salesforce credentials:
+This framework relies on a primary `.env` file for secrets, and environment-specific `.env` files (inside the `config/` folder) for environment-level overrides like `BASE_URL`.
+
+**1. Create your root `.env` file:**
+Copy `.env.example` to `.env` and fill in your Salesforce credentials (passwords, tokens, etc.):
 
 ```bash
 cp .env.example .env
+```
+
+**2. Create your environment-specific files:**
+The framework dynamically selects URLs based on the `TestEnv` variable. 
+Create `.env` files matching your environments inside the `config/` folder. For example, if you run tests with `TestEnv=sale`, you need a `config/sale.env` file.
+
+```bash
+mkdir -p config
+touch config/sale.env
+touch config/qa.env
+```
+
+Inside `config/sale.env`, define environment-specific variables like the actual domain:
+```env
+BASE_URL=https://your-domain.lightning.force.com
 ```
 
 ## 🐳 Docker
