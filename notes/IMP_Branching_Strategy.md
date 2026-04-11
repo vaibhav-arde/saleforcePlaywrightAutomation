@@ -16,7 +16,7 @@ main  (Production Truth - always green)
 │
 └── dev  (Controlled Integration - NOT a dumping ground)
      │
-     ├── feat/*
+     ├── feature/*
      ├── fix/*
      ├── chore/*
      └── spike/*
@@ -86,15 +86,15 @@ main  (Production Truth - always green)
 
 ---
 
-## 🔵 `feat/*` → **Short-lived Development Units**
+## 🔵 `feature/*` → **Short-lived Development Units**
 
 Strict naming convention:
 
 ```bash
-feat/ui-login-tests
-feat/api-account-validation
-feat/framework-fixtures-refactor
-feat/sf-opportunity-page
+feature/ui-login-tests
+feature/api-account-validation
+feature/framework-fixtures-refactor
+feature/sf-opportunity-page
 ```
 
 ---
@@ -128,7 +128,7 @@ spike/parallel-execution-poc
 spike/visual-regression-testing
 ```
 
-👉 NEVER merge directly → convert to `feat/*`
+👉 NEVER merge directly → convert to `feature/*`
 
 ---
 
@@ -136,7 +136,7 @@ spike/visual-regression-testing
 
 ---
 
-## 🧪 Layer 1: `feat → dev` PR Pipeline
+## 🧪 Layer 1: `feature → dev` PR Pipeline
 
 👉 Goal: Fast feedback (< 10 mins)
 
@@ -267,7 +267,7 @@ npx playwright test --grep-invert @quarantine   # Exclude quarantine
 
 | Branch  | Tests                                               |
 | ------- | --------------------------------------------------- |
-| feat PR | `--grep "@smoke\|@critical"` + lint + typecheck     |
+| feature PR | `--grep "@smoke\|@critical"` + lint + typecheck     |
 | dev     | `--grep @regression`                                |
 | main    | Full regression (no grep filter)                    |
 | nightly | Full + `--grep @quarantine` (flaky investigation)   |
@@ -343,7 +343,7 @@ export const EnvConfig = {
 
 | Branch | Environment | Command                               |
 | ------ | ----------- | ------------------------------------- |
-| feat   | QA          | `TestEnv=qa npx playwright test`      |
+| feature   | QA          | `TestEnv=qa npx playwright test`      |
 | dev    | Staging     | `TestEnv=staging npx playwright test` |
 | main   | Prod / RC   | `TestEnv=prod npx playwright test`    |
 
@@ -385,7 +385,7 @@ export const EnvConfig = {
 👉 Enforce conventional commits:
 
 ```bash
-feat: add account creation tests
+feature: add account creation tests
 fix: resolve flaky SF login locator
 chore: update playwright to 1.58
 test: add contact API validation
