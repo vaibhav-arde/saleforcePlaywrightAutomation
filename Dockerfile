@@ -1,4 +1,4 @@
-FROM node:20-bookworm
+FROM node:20-bookworm-slim
 
 ENV CI=true \
     HUSKY=0 \
@@ -11,7 +11,10 @@ COPY package.json package-lock.json ./
 
 RUN npm ci
 
-RUN npx playwright install --with-deps chromium
+RUN apt-get update --fix-missing \
+    && apt-get install -y \
+    && npx playwright install --with-deps chromium \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
