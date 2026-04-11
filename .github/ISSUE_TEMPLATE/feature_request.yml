@@ -1,0 +1,61 @@
+name: Feature request
+description: Suggest an enhancement for the framework, CI, docs, or Bruno collection.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing an idea. Clear problem statements help keep the framework focused and maintainable.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Framework architecture
+        - UI automation
+        - API automation
+        - E2E flow
+        - Bruno collection
+        - GitHub Actions / CI
+        - Documentation
+        - Developer experience
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem are you trying to solve?
+      placeholder: Describe the pain point, limitation, or gap.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      placeholder: Describe the change you would like to see.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: Describe any workarounds or alternatives you considered.
+    validations:
+      required: false
+  - type: textarea
+    id: value
+    attributes:
+      label: Expected value
+      description: Explain how this would improve reliability, maintainability, speed, or usability.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched for similar feature requests before opening this one.
+          required: true

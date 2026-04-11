@@ -155,3 +155,6 @@ See [`notes/`](notes/) for detailed documentation:
 - [Branching Strategy](notes/IMP_Branching_Strategy.md)
 - [Bruno API Usage](notes/IMP_Bruno_API_Usage.md)
 - [Linting Strategy](notes/IMP_Linting_Strategy.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contributing Guide](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)

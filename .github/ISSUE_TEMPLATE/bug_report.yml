@@ -1,0 +1,90 @@
+name: Bug report
+description: Report a defect in UI automation, API automation, docs, tooling, or CI.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem.
+
+        Please share enough detail for someone else to reproduce it without guessing.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of the repository is impacted?
+      options:
+        - UI automation
+        - API automation
+        - E2E flow
+        - Bruno collection
+        - GitHub Actions / CI
+        - Documentation
+        - Local setup / tooling
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+      placeholder: A concise description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include exact commands, test names, or request names when possible.
+      placeholder: |
+        1. Run ...
+        2. Navigate to ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      placeholder: What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment details
+      description: Share the execution context.
+      placeholder: |
+        Branch:
+        Browser/project:
+        TestEnv:
+        OS:
+        Node version:
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, screenshots, traces, or API details
+      description: Paste helpful evidence, but do not include secrets or tokens.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched for existing issues before opening this one.
+          required: true
+        - label: I removed or masked secrets, tokens, and sensitive Salesforce data.
+          required: true
