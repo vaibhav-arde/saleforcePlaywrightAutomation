@@ -20,6 +20,7 @@ Enterprise-grade test automation framework for **Salesforce Lightning** — UI +
 | `ESLint` + `Prettier`   | Code quality + formatting                |
 | `Husky` + `lint-staged` | Git hooks                                |
 | `@faker-js/faker`         | Test data generation                     |
+| `Bruno`                   | Manual and exploratory Salesforce API flows |
 | `Docker`                  | Containerized headless execution parity  |
 | `GitHub Actions`          | CI/CD pipeline and automated regressions |
 
@@ -38,6 +39,8 @@ tests/
 ├── ui/         ← UI test specs (@ui, @smoke)
 ├── api/        ← API test specs (@api, @regression)
 └── e2e/        ← Hybrid API+UI tests (@e2e, @critical)
+SalesforceAPI/
+└── Salesforce/ ← Bruno collection for token generation and sample Salesforce REST flows
 ```
 
 ## 📋 Environment Setup (Required First Step)
@@ -150,4 +153,5 @@ See [`notes/`](notes/) for detailed documentation:
 
 - [Framework Documentation](notes/Framework_Documentation.md)
 - [Branching Strategy](notes/IMP_Branching_Strategy.md)
+- [Bruno API Usage](notes/IMP_Bruno_API_Usage.md)
 - [Linting Strategy](notes/IMP_Linting_Strategy.md)
