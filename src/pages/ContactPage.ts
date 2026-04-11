@@ -16,7 +16,7 @@ export class ContactPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.newButton = page.locator(SFLocators.newButton());
+    this.newButton = SFLocators.newButton(page);
     this.salutationDropdown = page.locator("[name='salutation']");
     this.firstNameInput = page.locator("[name='firstName']");
     this.lastNameInput = page.locator("[name='lastName']");

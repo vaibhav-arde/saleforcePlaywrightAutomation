@@ -15,7 +15,7 @@ export class AccountPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.newButton = page.locator(SFLocators.newButton());
+    this.newButton = SFLocators.newButton(page);
     this.accountNameInput = page.locator("[name='Name']");
     this.accountNumberInput = page.locator("[name='AccountNumber']");
   }

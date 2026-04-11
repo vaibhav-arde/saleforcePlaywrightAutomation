@@ -1,3 +1,5 @@
+import type { Page, Locator } from '@playwright/test';
+
 /**
  * Salesforce Lightning component locator builders
  * DRY — centralized locator patterns to avoid string duplication across page objects
@@ -32,7 +34,7 @@ export const SFLocators = {
   appLauncherResult: (label: string) => `[data-label='${label}']`,
 
   /** Standard 'New' record button on list views */
-  newButton: () => "//a[@title='New']",
+  newButton: (page: Page): Locator => page.getByRole('button', { name: /^New$/ }),
 
   /** Save/Edit button on record forms */
   saveButton: () => "[name='SaveEdit']",

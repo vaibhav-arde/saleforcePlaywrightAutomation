@@ -12,6 +12,10 @@
     "test:e2e": "npx playwright test --grep @e2e",
     "test:e2e:chromium": "npx playwright test --project=chromium --grep @e2e",
     "test:smoke": "npx playwright test --grep @smoke",
+    "test:ui:smoke": "npx playwright test --grep '(?=.*@smoke)(?=.*@ui)'",
+    "test:ui:smoke:chromium": "npx playwright test --project=chromium --grep '(?=.*@smoke)(?=.*@ui)'",
+    "test:ui:smoke:chromium:headed": "npx playwright test --project=chromium --grep '(?=.*@smoke)(?=.*@ui)' --headed",
+    "test:ui:e2e:chromium:headed": "npx playwright test --grep \"@ui|@e2e\" --grep-invert @smoke --project=chromium --headed",
     "test:smoke:chromium": "npx playwright test --project=chromium --grep @smoke",
     "test:regression": "npx playwright test --grep @regression",
     "test:regression:chromium": "npx playwright test --project=chromium --grep @regression",
@@ -25,7 +29,13 @@
     "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
-  "keywords": ["playwright", "typescript", "salesforce", "automation", "testing"],
+  "keywords": [
+    "playwright",
+    "typescript",
+    "salesforce",
+    "automation",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {

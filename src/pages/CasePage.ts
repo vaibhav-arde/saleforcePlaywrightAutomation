@@ -14,7 +14,7 @@ export class CasePage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.newButton = page.locator(SFLocators.newButton());
+    this.newButton = SFLocators.newButton(page);
     this.subjectInput = page.locator("[name='Subject']");
     this.descriptionInput = page.locator("[name='Description']");
   }

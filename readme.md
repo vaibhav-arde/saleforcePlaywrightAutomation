@@ -37,22 +37,31 @@ tests/
 └── e2e/        ← Hybrid API+UI tests (@e2e, @critical)
 ```
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Local Execution)
 
 ```bash
-# Install dependencies
+# Install dependencies & browsers
 npm install
-
-# Install browsers
 npx playwright install --with-deps
+```
 
-# Run all tests
-npx playwright test
+### 🔐 Multi-Factor Authentication (Strict UI Prerequisite)
+If your Salesforce environment enforces MFA, you **must** generate a local session cookie before running any UI or E2E tests. (This is not required for purely API tests, as they authenticate implicitly via OAuth2 tokens).
+```bash
+# Opens a browser window. Log in manually and enter your SMS/Authenticator code.
+# This securely saves your session to `playwright/.auth/user.json` for all subsequent UI tests to absorb!
+npx playwright test tests/setup/auth.setup.ts --project=setup
+```
 
-# Run by tag
-npx playwright test --grep @smoke
-npx playwright test --grep @api
-npx playwright test --grep @e2e
+### 🏃 Running Tests Locally
+```bash
+# Run specific suites
+npm run test:api
+npm run test:ui
+npm run test:e2e
+
+# Run UI and E2E specifically skipping Smoke tests (Headed Chromium)
+npm run test:ui:e2e:chromium:headed
 ```
 
 ## 📋 Environment Setup
@@ -81,23 +90,29 @@ Inside `config/sale.env`, define environment-specific variables like the actual 
 BASE_URL=https://your-domain.lightning.force.com
 ```
 
-## 🐳 Docker
+## 🐳 Docker Execution
 
-Use Docker when you want a predictable local runner without installing Node or Playwright browsers on your machine.
+Use Docker when you want a highly predictable, pristine headless Linux runner without relying on your Mac's Node environment.
 
+### ⚠️ The Docker UI Prerequisite
+Because Docker containers operate entirely headlessly (no monitor or UI rendering engine), you absolutely cannot type in MFA codes inside tests running on Docker. 
+**You MUST run the `auth.setup.ts` script on your local Mac first** (as shown above in the Quick Start). Through Volume Mounting, Docker will seamlessly absorb your local `playwright/.auth/user.json` token and completely bypass the Salesforce login screens inside the headless container!
+
+### 🏃 Running Tests inside Docker
+Build the ultra-optimized `node-slim` container locally:
 ```bash
-# Build and run the default containerized suite (Chromium API tests)
-docker compose up --build playwright-tests
-
-# Run a different suite inside the same container image
-docker compose run --rm playwright-tests npm run test:smoke:chromium
-docker compose run --rm playwright-tests npm run test:regression:chromium
-docker compose run --rm playwright-tests npm run test:e2e:chromium
+docker compose build
 ```
 
-The Docker image intentionally defaults to `chromium` because that matches the current CI path and keeps the container leaner and more reliable across developer machines.
+Execute tests completely headlessly in isolated Linux memory (cleaned up automatically via `--rm`):
+```bash
+# Run API Tests (Default Command)
+docker compose run --rm playwright-tests
 
-UI and E2E execution inside Docker still depends on your current Salesforce authentication flow. This repo has a manual MFA-based setup step in [`tests/setup/auth.setup.ts`](tests/setup/auth.setup.ts), so API tests are the safest default for containerized runs unless you already have a valid Playwright auth state available.
+# Run UI and E2E specifically skipping Smoke tests
+docker compose run --rm playwright-tests npx playwright test --grep "@ui|@e2e" --grep-invert @smoke --project=chromium
+```
+*(Note: Attempting to pass the `--headed` flag onto Docker commands will fatally crash Playwright, because Linux containers do not possess physical monitors! To visually watch tests run, stick to Local Execution).*
 
 ## ✅ Recommended Execution Strategy
 
